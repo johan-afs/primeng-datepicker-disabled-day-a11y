@@ -1,5 +1,12 @@
-<h2>PrimeNG Issue Template</h2>
-<p>Please create a test case and attach the link of the plunkr to your github issue report.</p>
-
-<button pButton (click)="onClick()">PrimeNG</button>
-{{counter}}
+<h2>DatePicker: unselectable days are not exposed as disabled to assistive technology</h2>
+<p>
+  The 15th is in <code>disabledDates</code>, and the days of the adjacent months are not selectable either.
+  Neither their <code>&lt;td&gt;</code> (the gridcell) nor the day <code>&lt;span&gt;</code> carries
+  <code>aria-disabled</code>. The only signal is the <code>p-disabled</code> class, which a screen reader does not see.
+  <code>[pt]</code> cannot add it conditionally either, because <code>ptm('dayCell')</code> receives no per-date context.
+</p>
+<div #host>
+  <p-datepicker [(ngModel)]="date" [inline]="true" [disabledDates]="disabledDates" [pt]="pt" />
+</div>
+<p><button type="button" (click)="inspect(host)">Show the markup of the first unselectable days</button></p>
+<pre>{{ markup }}</pre>
